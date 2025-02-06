@@ -14,29 +14,45 @@ class BankAccount
         cout<<"Enter acc no : ";
         cin>>acc_no;
         cout<<"Balance:"<<balance<<endl;
-
     }
 
     void deposite(int acc)
     {
         if(acc==acc_no)
         {
-        int i,new_balance;
+        int i;
         cout<<"Enter the amount that you want to add : ";
         cin>>i;
-        new_balance=balance+i;
-        cout<<"New Balance : "<<new_balance;
-
+        balance=balance+i;
+        cout<<"New Balance : "<<balance<<endl;
         }
-
     }
 
+    void withdraw(int acc)
+    {
+        if(acc==acc_no)
+        {
+        int withdraw_amount;
+        cout<<"Enter the amount that you want to withdraw : ";
+        cin>>withdraw_amount;
+        if(withdraw_amount>balance)
+        {
+            cout<<"Account has insufficient balance...";
+        }
+        else
+        {
+        balance=balance-withdraw_amount;
+        cout<<"New Balance : "<<balance;
+        }
+
+        }
+    }
 };
 
 int main()
 {
     BankAccount A;
-    int i,findacc;
+    int i,findacc,findacc2;
     for(i=0;i<5;i++)
     {
         A.details();
@@ -46,6 +62,13 @@ int main()
     for(i=0;i<5;i++)
     {
         A.deposite(findacc);
+        break;
+    }
+    cout<<"Enter acc no for find : ";
+    cin>>findacc;
+    for(i=0;i<5;i++)
+    {
+        A.withdraw(findacc);
         break;
     }
 
