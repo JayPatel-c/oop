@@ -33,8 +33,10 @@ public:
         CalculateEMI();
     }
 
-    void DisplayData()
+    void DisplayData(int checkID)
     {
+        if(checkID==loanID)
+        {
         cout<<"----------------------"<<endl;
         cout<<"loan ID : "<<loanID<<endl;
         cout<<"Name : "<<name<<endl;
@@ -43,12 +45,40 @@ public:
         cout<<"Loan Tenure : "<<LoanTenure<<endl;
         cout<<"EMI : "<<EMI<<endl;
         cout<<"----------------------";
+        }
+        else
+        {
+        cout<<"Invalid ID...";
+
+        }
     }
 };
 int main()
 {
-    LoanAccount A;
-    A.AddDetails();
-    A.DisplayData();
+    LoanAccount A[20];
+    int numAcc=0;
+    int choice;
+    cout<<"Enter '1' for add account details."<<endl;
+    cout<<"Enter '2' for display account details."<<endl;
+    cin>>choice;
+    switch(choice)
+    {
+        case 1:
+            {
+                A[numAcc].AddDetails();
+                numAcc++;
+                break;
+            }
+        case 2:
+            {
+                int checkID;
+                cout<<"Enter check ID:";
+                cin>>checkID;
+                A[numAcc].DisplayData(checkID);
+                break;
+            }
+    }
+
+
     return 0;
 }
