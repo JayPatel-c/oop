@@ -31,7 +31,7 @@ public:
 
 int main()
 {
-    Employee E;
+    Employee E;//error
     char name[20];
     int salary;
     int bonus;
