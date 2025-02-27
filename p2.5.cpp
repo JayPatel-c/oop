@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<math.h>
 using namespace std;
@@ -35,8 +36,7 @@ public:
 
     void DisplayData(int checkID)
     {
-        if(checkID==loanID)
-        {
+
         cout<<"----------------------"<<endl;
         cout<<"loan ID : "<<loanID<<endl;
         cout<<"Name : "<<name<<endl;
@@ -44,13 +44,12 @@ public:
         cout<<"Annual Rate : "<<AnnualRate<<endl;
         cout<<"Loan Tenure : "<<LoanTenure<<endl;
         cout<<"EMI : "<<EMI<<endl;
-        cout<<"----------------------";
-        }
-        else
-        {
-        cout<<"Invalid ID...";
+        cout<<"----------------------"<<endl;
 
-        }
+    }
+    int getID()
+    {
+        return loanID;
     }
 };
 int main()
@@ -58,6 +57,7 @@ int main()
     LoanAccount A[20];
     int numAcc=0;
     int choice;
+    b:
     cout<<"Enter '1' for add account details."<<endl;
     cout<<"Enter '2' for display account details."<<endl;
     cin>>choice;
@@ -74,11 +74,24 @@ int main()
                 int checkID;
                 cout<<"Enter check ID:";
                 cin>>checkID;
-                A[numAcc].DisplayData(checkID);
-                break;
-            }
-    }
+                for (int i = 0; i < numAcc; i++)
+                {
+                    if(A[i].getID()==checkID)
+                    {
+                    A[i].DisplayData(checkID);
+                    break;
+                    }
+                    else
+                    {
+                    cout<<"Invalid ID..."<<endl; //error 2 times invalid
+                    }
+                }
 
+                    break;
+            }
+
+    }
+    goto b;
 
     return 0;
 }
