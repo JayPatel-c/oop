@@ -1,10 +1,8 @@
-
 #include<iostream>
 #include<math.h>
 using namespace std;
 
-class LoanAccount
-{
+class LoanAccount {
     int loanID;
     char name[20];
     long LoanAmount;
@@ -12,86 +10,97 @@ class LoanAccount
     float LoanTenure;
     double EMI;
     float AnnualRate;
-    void CalculateEMI()
-    {
-        InterestRate=AnnualRate/12/100;
-        EMI=((LoanAmount*InterestRate*pow((1+InterestRate),LoanTenure))/(pow((1+InterestRate),LoanTenure)-1));
+
+    void CalculateEMI() {
+        InterestRate = AnnualRate / 12 / 100;
+        EMI = ((LoanAmount * InterestRate * pow((1 + InterestRate), LoanTenure)) /
+               (pow((1 + InterestRate), LoanTenure) - 1));
     }
 
 public:
-    void AddDetails()
-    {
-        cout<<"Enter loan ID : ";
-        cin>>loanID;
-        cout<<"Enter name : ";
-        cin>>name;
-        cout<<"Enter Loan Amount : ";
-        cin>>LoanAmount;
-        cout<<"Enter Interest Rate : ";
-        cin>>AnnualRate;
-        cout<<"Enter Loan Tenure : ";
-        cin>>LoanTenure;
+    void AddDetails() {
+        cout << endl<<"----- Enter Loan Account Details -----"<<endl;
+        cout << "Enter Loan ID            : ";
+        cin >> loanID;
+        cout << "Enter Name               : ";
+        cin >> name;
+        cout << "Enter Loan Amount        : ";
+        cin >> LoanAmount;
+        cout << "Enter Annual Interest (%) : ";
+        cin >> AnnualRate;
+        cout << "Enter Loan Tenure (months): ";
+        cin >> LoanTenure;
         CalculateEMI();
+        cout << "Account details added successfully!"<<endl;
     }
 
-    void DisplayData(int checkID)
-    {
-
-        cout<<"----------------------"<<endl;
-        cout<<"loan ID : "<<loanID<<endl;
-        cout<<"Name : "<<name<<endl;
-        cout<<"Loan Amount : "<<LoanAmount<<endl;
-        cout<<"Annual Rate : "<<AnnualRate<<endl;
-        cout<<"Loan Tenure : "<<LoanTenure<<endl;
-        cout<<"EMI : "<<EMI<<endl;
-        cout<<"----------------------"<<endl;
-
+    void DisplayData() {
+        cout << endl<<"========== Loan Account Details =========="<<endl;
+        cout << "Loan ID        : " << loanID << endl;
+        cout << "Name           : " << name << endl;
+        cout << "Loan Amount    : " << LoanAmount << endl;
+        cout << "Annual Rate    : " << AnnualRate << "%" << endl;
+        cout << "Loan Tenure    : " << LoanTenure << " months" << endl;
+        cout << "Monthly EMI    : " << EMI << endl;
+        cout << "=========================================="<<endl;
     }
-    int getID()
-    {
+
+    int getID() {
         return loanID;
     }
 };
-int main()
+
+int main() 
 {
     LoanAccount A[20];
-    int numAcc=0;
+    bool flag=false;
+    int numAcc = 0;
     int choice;
-    b:
-    cout<<"Enter '1' for add account details."<<endl;
-    cout<<"Enter '2' for display account details."<<endl;
-    cin>>choice;
-    switch(choice)
+
+b:
+    cout << endl<<"========== Loan Management Menu =========="<<endl;
+    cout << "1. Add Account Details"<<endl;
+    cout << "2. Display Account Details by ID"<<endl;
+    cout << "3. Exit."<<endl;
+    cout << "Enter your choice (1 or 3): ";
+    cin >> choice;
+
+    switch (choice)
     {
         case 1:
+            A[numAcc].AddDetails();
+            numAcc++;
+            break;
+
+        case 2:
+        {
+            int checkID;
+            cout << endl<<"Enter Loan ID to display details: ";
+            cin >> checkID;
+
+            for (int i = 0; i < numAcc; i++) 
             {
-                A[numAcc].AddDetails();
-                numAcc++;
+                if (A[i].getID() == checkID) 
+                {
+                    flag=true;
+                    A[i].DisplayData();
+                    break;
+                }
+                if(!flag)
+                {
+                cout << "Item not found!"<<endl;
+                }
                 break;
             }
-        case 2:
-            {
-                int checkID;
-                cout<<"Enter check ID:";
-                cin>>checkID;
-                for (int i = 0; i < numAcc; i++)
-                {
-                    if(A[i].getID()==checkID)
-                    {
-                    A[i].DisplayData(checkID);
-                    break;
-                    }
-                    else
-                    {
-                    cout<<"Invalid ID..."<<endl; //error 2 times invalid
-                    }
-                }
+        }
 
-                    break;
-            }
-
+        case 3:
+        {
+            cout<<"Exit,Thank you."<<endl;
+            return 0;
+        }
+        default:
+            cout << "Invalid choice. Please enter 1 or 3."<<endl;
     }
     goto b;
-
-    return 0;
 }
