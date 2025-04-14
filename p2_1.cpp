@@ -1,90 +1,88 @@
 #include<iostream>
 using namespace std;
 
-class PlotData
-{
-    int length,width,area,perimeter;
+class PlotData {
+    int length, width, area, perimeter;
 
-    public:
-    void AddData()
-    {
-    cout<<"Enter length : ";
-    cin>>length;
-    cout<<"Enter Width : ";
-    cin>>width;
-    area=length*width;
-    perimeter=2*(length+width);
+public:
+    void AddData() {
+        cout << "Enter length : ";
+        cin >> length;
+        cout << "Enter width : ";
+        cin >> width;
+        area = length * width;
+        perimeter = 2 * (length + width);
     }
 
-    void UpdateData()
-    {
-    cout<<"Enter New length : ";
-    cin>>length;
-    cout<<"Enter New Width : ";
-    cin>>width;
-    area=length*width;
-    perimeter=2*(length+width);
+    void UpdateData() {
+        cout << "Enter new length : ";
+        cin >> length;
+        cout << "Enter new width : ";
+        cin >> width;
+        area = length * width;
+        perimeter = 2 * (length + width);
     }
 
-    void DisplayData()
-    {
-    cout<<"Length: "<<length<<endl<<"Width: "<<width<<endl<<"Area: "<<area<<endl<<"Perimeter: "<<perimeter<<endl;
+    void DisplayData() {
+        cout << "--------------------------" << endl;
+        cout << "Length: " << length
+             << "\nWidth: " << width
+             << "\nArea: " << area
+             << "\nPerimeter: " << perimeter << endl;
+        cout << "--------------------------" << endl;
     }
 };
 
-int main()
-{
+int main() {
     PlotData P[20];
-    int choice,NumPlot=0,i;
-    cout<<"Enter"<<endl<<"1 for Add Data."<<endl<<"2 for Update Data."<<endl<<"3 for Display Data."<<endl<<"Else for exit."<<endl;
+    int choice, NumPlot = 0, i;
+    bool flag=false;
     next:
-    cout<<"Enter choice :";
-    cin>>choice;
+    cout << "\n--- MENU ---" << endl;
+    cout << "1. Add Data" << endl;
+    cout << "2. Update Data" << endl;
+    cout << "3. Display Data" << endl;
+    cout << "4. Exit." << endl;
+    cout << "Enter choice: ";
+    cin >> choice;
 
-    switch(choice)
-    {
-    case 1:
-        {
-            P[NumPlot].AddData();
-            NumPlot++;
+    switch (choice) {
+        case 1:
+            if (NumPlot < 20) {
+                P[NumPlot].AddData();
+                NumPlot++;
+            } else {
+                cout << "Maximum plot limit reached!" << endl;
+            }
             break;
-        }
-    case 2:
-        {
-        cout<<"Enter Plot No. :";
-        cin>>i;
 
-            if(i<=NumPlot)
-            {
-                P[i-1].UpdateData();
-                break;
+        case 2:
+            cout << "Enter Plot No. to update (1 to " << NumPlot << "): ";
+            cin >> i;
+            
+            if (i >= 1 && i <= NumPlot) {
+                P[i - 1].UpdateData();
+            } else {
+                cout << "Enter a valid Plot number..." << endl;
             }
-            else
-            {
-            cout<<"Enter valid Plot no. ..."<<endl;
             break;
-            }
-        }
+
         case 3:
+            cout << "Enter Plot No. to display (1 to " << NumPlot << "): ";
+            cin >> i;
+            if (i >= 1 && i <= NumPlot) {
+                P[i - 1].DisplayData();
+            } else {
+                cout << "Enter a valid Plot number..." << endl;
+            }
+            break;
+        case 4:
         {
-        cout<<"Enter Plot No. :";
-        cin>>i;
-
-            if(i<=NumPlot)
-            {
-                P[i-1].DisplayData();
-                break;
-            }
-            else
-            {
-            cout<<"Enter valid Plot no. ..."<<endl;
-            break;
-            }
-            break;
-
+            cout<<"Thank you,exit.";
+            return 0;
         }
         default:
-            return 0;
+         cout << "Invalid choice. Please enter 1 or 4.\n";
     }
     goto next;
 }
