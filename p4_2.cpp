@@ -88,5 +88,8 @@ int main()
           else{
             goto program;
           }
+    for (int i = 0; i < count; i++) {
+        delete Emp[i];
+    }
           return 0;
 }
