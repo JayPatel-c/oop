@@ -49,5 +49,8 @@ int main()
             cout<<endl;
             goto program;
         };
+    for (int i = 0; i < count; i++) {
+        delete c[i];
+    }
         return 0;
 }
