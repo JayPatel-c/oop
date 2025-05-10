@@ -11,7 +11,7 @@ int main() {
     vector<pair<string,int>> students;
     string name;
     int score;
-    cout<<"Enter name and score (for eg. Ansh 55) and enter -1 to stop: ";
+    cout<<"Enter name and score (for eg. Jay 55) and enter -1 to stop: ";
     while(1) {
         cin>>name>>score;
         if(name == "-1" || score == -1)
