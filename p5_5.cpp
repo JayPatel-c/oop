@@ -59,7 +59,6 @@ int main(){
                 break;
             case 0:
                 cout<<"\nThank you!"<<endl;
-                cout<<"Anshkumar Darji - 24CE022"<<endl;
                 break;
             default:
                 cout<<"Enter valid choice!"<<endl;
